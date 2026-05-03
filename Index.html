@@ -50,7 +50,7 @@
         }
         .minimal-input {
             border: none;
-            border-bottom: 1px solid #D1D5DB;
+            border-bottom: 2px solid rgba(217, 4, 41, 0.35);
             border-radius: 0;
             padding: 0.75rem 0;
             background-color: transparent;
@@ -94,6 +94,30 @@
             transform: scale(1.1);
             background-color: #b91c1c;
         }
+        .logo-joyfit-wrap {
+            display: inline-block;
+            background-color: var(--brand-red);
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.125rem;
+            line-height: 0;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+        }
+        .logo-joyfit-wrap img {
+            height: 2rem;
+            width: auto;
+            display: block;
+        }
+        .link-brand {
+            color: var(--brand-red);
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-color: var(--brand-red);
+            text-underline-offset: 0.25em;
+            text-decoration-thickness: 2px;
+        }
+        .link-brand:hover {
+            opacity: 0.88;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -119,7 +143,7 @@
                     <p class="font-bold text-brand-red">【2点当月末日までに申請】</p>
                     <p>いずれか一方のみでは適用されません。</p>
                     <p class="pt-1">
-                        JOYFITアプリは<a href="https://joyfit.jp/pr_app/" target="_blank" rel="noopener noreferrer" class="text-brand-red font-bold underline underline-offset-2 hover:opacity-80">コチラ</a>からDL
+                        JOYFITアプリは<a href="https://joyfit.jp/pr_app/" target="_blank" rel="noopener noreferrer" class="link-brand">コチラ</a>からDL
                     </p>
                 </div>
 
@@ -160,18 +184,14 @@
                     </div>
                 </form>
             </div>
-
-            <p class="text-center mt-10">
-                <a href="https://24kyodo-special-plan.vercel.app/" class="text-sm text-gray-400 hover:text-white underline underline-offset-2 transition-colors">
-                    JOYFIT24経堂 キャンペーン一覧へ
-                </a>
-            </p>
         </div>
     </main>
 
-    <footer class="bg-black/50 border-t border-gray-700 backdrop-blur-sm">
-        <div class="container mx-auto px-6 py-8 text-center text-gray-500 text-xs space-y-4">
-            <img src="joyfit_logo.png" alt="JOYFIT24" class="mx-auto h-12 w-auto">
+    <footer class="bg-black/50 border-t-2 border-brand-red backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400 text-xs space-y-4">
+            <div class="logo-joyfit-wrap mx-auto">
+                <img src="joyfit_logo.png" alt="JOYFIT24">
+            </div>
             <p>&copy; JOYFIT24 Kyodo</p>
         </div>
     </footer>
@@ -191,7 +211,7 @@
                     <p class="font-bold text-sm sm:text-base">この画面をスクリーンショットして<br>必ず保存してください</p>
                 </div>
                 <div class="mt-6">
-                    <a href="https://joyfit.jp/kyodo/app_join/" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-400 hover:text-brand-red underline transition-colors">
+                    <a href="https://joyfit.jp/kyodo/app_join/" target="_blank" rel="noopener noreferrer" class="link-brand text-xs">
                         JOYFITアプリで入会手続きへ
                     </a>
                 </div>
