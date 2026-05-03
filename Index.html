@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<!-- 農大ラグビー専用デプロイ: Vercel 新プロジェクト名 24kyodo-nodai-rugby / Root Directory に nodai-rugby を指定 -->
 <html lang="ja" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>JOYFIT24経堂 | 東京農業大学ラグビー部様 特別割引</title>
-    <meta name="description" content="東京農業大学ラグビー部員様向け、JOYFIT24経堂の特別割引。本ページから申請できます（Googleアカウント不要）。">
+    <meta name="description" content="JOYFIT24経堂｜東京農業大学ラグビー部様 特別割引お申込">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,34 +107,20 @@
             <h2 class="mt-6 text-2xl md:text-4xl font-bold text-white drop-shadow-lg">
                 特別割引 <span class="text-brand-red">お申込</span>
             </h2>
-            <p class="mt-4 text-base md:text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed">
-                このページのフォームからそのまま申請できます。<strong class="text-white">Googleアカウントは不要</strong>です。
-            </p>
         </div>
     </header>
 
     <main class="pb-20 sm:pb-24 px-6">
         <div class="container mx-auto max-w-lg">
             <div class="lp-card p-8 md:p-10 relative">
-                <div class="mb-8 rounded-lg border-2 border-brand-red bg-red-50 p-5 text-gray-900">
-                    <p class="text-center text-sm font-bold text-brand-red tracking-wide mb-2">必須のお手続き（両方）</p>
-                    <p class="text-center text-base font-bold text-gray-900 leading-snug">
-                        このページでの申請 <span class="text-gray-400 font-normal mx-1">＋</span> JOYFITアプリからの入会
+                <div class="mb-8 rounded-lg border-2 border-brand-red bg-red-50 p-5 text-center text-sm text-gray-800 space-y-3 leading-relaxed">
+                    <p class="font-bold text-gray-900">こちら専用ページ申請 ＋ JOYFITアプリから入会</p>
+                    <p>割引適用は上記2点を完了していただく必要があります</p>
+                    <p class="font-bold text-brand-red">【2点当月末日までに申請】</p>
+                    <p>いずれか一方のみでは適用されません。</p>
+                    <p class="pt-1">
+                        JOYFITアプリは<a href="https://joyfit.jp/pr_app/" target="_blank" rel="noopener noreferrer" class="text-brand-red font-bold underline underline-offset-2 hover:opacity-80">コチラ</a>からDL
                     </p>
-                    <p class="mt-4 text-sm text-gray-700 leading-relaxed text-center">
-                        特典・割引の適用には、<strong class="text-gray-900">上記2点をそろえて完了</strong>していただく必要があります。いずれか一方のみでは適用されません。
-                    </p>
-                    <p class="mt-3 text-sm text-gray-700 leading-relaxed text-center">
-                        <strong class="text-brand-red">ラグビー部専用割引の対象月内</strong>に、申請および入会手続きをお済ませください。
-                    </p>
-                    <a
-                        href="https://joyfit.jp/kyodo/app_join/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="cta-button mt-5 block w-full text-center border-2 border-brand-red text-brand-red font-bold py-3 px-4 rounded-lg bg-white hover:bg-gray-50 text-sm sm:text-base"
-                    >
-                        JOYFITアプリで入会手続きへ（経堂）
-                    </a>
                 </div>
 
                 <form id="nodai-rugby-form" class="space-y-8" novalidate>
@@ -148,7 +133,7 @@
 
                     <div>
                         <label for="furigana" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">フリガナ（カタカナ）</label>
-                        <input type="text" id="furigana" name="フリガナ" placeholder="例：ヤマダ タロウ（カタカナ）" required class="minimal-input w-full text-lg placeholder-gray-300">
+                        <input type="text" id="furigana" name="フリガナ" placeholder="例：ヤマダ タロウ" required class="minimal-input w-full text-lg placeholder-gray-300">
                     </div>
 
                     <div>
@@ -167,10 +152,6 @@
                         <label for="grad-month" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">卒業予定年月</label>
                         <input type="month" id="grad-month" name="卒業予定年月" required class="minimal-input w-full text-lg">
                     </div>
-
-                    <p class="text-xs text-gray-500 leading-relaxed">
-                        割引条件・必要書類・会費の詳細などは、店舗または部のご担当者様からのご案内をご確認ください。
-                    </p>
 
                     <div class="pt-2">
                         <button type="submit" class="cta-button w-full bg-brand-red text-white font-bold py-4 px-6 rounded-lg hover:bg-brand-red-dark text-base tracking-wide">
@@ -200,8 +181,7 @@
             <button type="button" id="modal-close-btn" class="close-btn" aria-label="閉じる">&times;</button>
             <div class="text-center">
                 <h3 class="text-2xl font-black text-gray-900 mb-2">申請ありがとうございます</h3>
-                <p class="text-sm text-gray-500 font-bold">申請を受け付けました</p>
-                <p class="text-sm text-gray-500 mt-1 mb-6">下記がお控えの代わりになります</p>
+                <p class="text-sm text-gray-500 font-bold mb-6">申請を受け付けました</p>
                 <div id="receipt-content" class="mb-8 text-left bg-gray-50 p-6 rounded border border-gray-100 space-y-3 text-sm text-gray-600"></div>
                 <div class="bg-red-50 border-2 border-brand-red rounded-lg p-4 text-brand-red shadow-md animate-pulse">
                     <div class="flex items-center justify-center mb-1">
@@ -212,7 +192,7 @@
                 </div>
                 <div class="mt-6">
                     <a href="https://joyfit.jp/kyodo/app_join/" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-400 hover:text-brand-red underline transition-colors">
-                        まだ入会がお済みでない方はこちら (JOYFIT APP)
+                        JOYFITアプリで入会手続きへ
                     </a>
                 </div>
             </div>
