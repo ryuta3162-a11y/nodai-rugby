@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- 農大ラグビー専用デプロイ: Vercel 新プロジェクト名 24kyodo-nodai-rugby / Root Directory に nodai-rugby を指定 -->
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>JOYFIT24経堂 | 東京農業大学ラグビー部様 特別割引</title>
+    <meta name="description" content="東京農業大学ラグビー部員様向け、JOYFIT24経堂の特別割引。専用フォームの申請とJOYFITアプリからの入会が必要です。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #F3F4F6;
+            background-image:
+                linear-gradient(rgba(17, 24, 39, 0.88), rgba(17, 24, 39, 0.92)),
+                url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        :root {
+            --brand-red: #D90429;
+            --brand-red-dark: #B30021;
+        }
+        .text-brand-red { color: var(--brand-red); }
+        .bg-brand-red { background-color: var(--brand-red); }
+        .hover\:bg-brand-red-dark:hover { background-color: var(--brand-red-dark); }
+        .border-brand-red { border-color: var(--brand-red); }
+        .lp-card {
+            background-color: #FFFFFF;
+            border: 4px solid transparent;
+            background-image: linear-gradient(#fff, #fff), linear-gradient(135deg, #ff8a9e 0%, #D90429 50%, #8a001a 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            border-radius: 1.5rem;
+            color: #1F2937;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(217, 4, 41, 0.25), 0 4px 6px -2px rgba(217, 4, 41, 0.15);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="w-full">
+        <div class="container mx-auto px-6 pt-12 pb-6 md:pt-16 text-center max-w-3xl">
+            <p class="text-sm md:text-base font-bold text-gray-300 tracking-widest mb-3">東京農業大学 ラグビー部 部員様限定</p>
+            <h1 class="text-3xl md:text-5xl font-black text-white leading-tight drop-shadow-lg">
+                JOYFIT24 <span class="text-brand-red">経堂</span>
+            </h1>
+            <h2 class="mt-6 text-2xl md:text-4xl font-bold text-white drop-shadow-lg">
+                特別割引 <span class="text-brand-red">お申込</span>
+            </h2>
+            <p class="mt-4 text-base md:text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed">
+                お手続きはページ内のご案内に沿ってお進みください。
+            </p>
+        </div>
+    </header>
+
+    <main class="pb-20 sm:pb-24 px-6">
+        <div class="container mx-auto max-w-lg">
+            <div class="lp-card p-8 md:p-10">
+                <div class="mb-8 rounded-lg border-2 border-brand-red bg-red-50 p-5 text-gray-900">
+                    <p class="text-center text-sm font-bold text-brand-red tracking-wide mb-2">必須のお手続き（両方）</p>
+                    <p class="text-center text-base font-bold text-gray-900 leading-snug">
+                        専用フォームでの申請 <span class="text-gray-400 font-normal mx-1">＋</span> JOYFITアプリからの入会
+                    </p>
+                    <p class="mt-4 text-sm text-gray-700 leading-relaxed text-center">
+                        特典・割引の適用には、<strong class="text-gray-900">上記2点をそろえて完了</strong>していただく必要があります。いずれか一方のみでは適用されません。
+                    </p>
+                    <p class="mt-3 text-sm text-gray-700 leading-relaxed text-center">
+                        <strong class="text-brand-red">ラグビー部専用割引の対象月内</strong>に、申請および入会手続きをお済ませください。
+                    </p>
+                    <a
+                        href="https://joyfit.jp/kyodo/app_join/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="cta-button mt-5 block w-full text-center border-2 border-brand-red text-brand-red font-bold py-3 px-4 rounded-lg bg-white hover:bg-gray-50 text-sm sm:text-base"
+                    >
+                        JOYFITアプリで入会手続きへ（経堂）
+                    </a>
+                </div>
+
+                <h3 class="text-xl md:text-2xl font-bold text-gray-900 text-center border-b border-gray-200 pb-4 mb-6">
+                    お申込フォームで入力いただく項目
+                </h3>
+                <p class="text-sm text-gray-600 text-center mb-6">
+                    （Googleフォーム「東京農業大学 ラグビー部様 特別割引お申込フォーム」の設問に準拠）
+                </p>
+                <ul class="space-y-4 text-gray-700 text-sm md:text-base">
+                    <li class="flex gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center mt-0.5">1</span>
+                        <span><strong class="text-gray-900">お名前</strong>（漢字）<span class="text-brand-red font-bold text-xs ml-1">必須</span></span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center mt-0.5">2</span>
+                        <span><strong class="text-gray-900">フリガナ</strong>（カタカナ）<span class="text-brand-red font-bold text-xs ml-1">必須</span></span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center mt-0.5">3</span>
+                        <span><strong class="text-gray-900">現在の学年</strong>（１〜４年生／その他）<span class="text-brand-red font-bold text-xs ml-1">必須</span></span>
+                    </li>
+                    <li class="flex gap-3">
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center mt-0.5">4</span>
+                        <span><strong class="text-gray-900">卒業予定年月</strong>（日付選択）<span class="text-brand-red font-bold text-xs ml-1">必須</span></span>
+                    </li>
+                </ul>
+                <p class="mt-8 text-xs text-gray-500 leading-relaxed">
+                    割引条件・必要書類・会費の詳細などは、従来どおり店舗または部のご担当者様からのご案内をご確認ください。本ページは申込導線のご案内です。
+                </p>
+                <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSe_BFRHR1PKR_SwouRecWlvdH15WxMwNZOQFrt8jqvsVVjQPg/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="cta-button mt-8 w-full block text-center bg-brand-red text-white font-bold py-4 px-6 rounded-lg hover:bg-brand-red-dark text-base md:text-lg tracking-wide"
+                >
+                    専用フォームで申し込む（Googleフォーム）
+                </a>
+            </div>
+
+            <p class="text-center mt-10">
+                <a href="https://24kyodo-special-plan.vercel.app/" class="text-sm text-gray-400 hover:text-white underline underline-offset-2 transition-colors">
+                    JOYFIT24経堂 キャンペーン一覧へ
+                </a>
+            </p>
+        </div>
+    </main>
+
+    <footer class="bg-black/50 border-t border-gray-700 backdrop-blur-sm">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500 text-xs space-y-4">
+            <img src="joyfit_logo.png" alt="JOYFIT24" class="mx-auto h-12 w-auto">
+            <p>&copy; JOYFIT24 Kyodo</p>
+        </div>
+    </footer>
+</body>
+</html>
