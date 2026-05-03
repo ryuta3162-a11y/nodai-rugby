@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>JOYFIT24経堂 | 東京農業大学ラグビー部様 特別割引</title>
-    <meta name="description" content="東京農業大学ラグビー部員様向け、JOYFIT24経堂の特別割引。専用フォームの申請とJOYFITアプリからの入会が必要です。">
+    <meta name="description" content="東京農業大学ラグビー部員様向け、JOYFIT24経堂の特別割引。本ページから申請できます（Googleアカウント不要）。">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,6 +49,52 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(217, 4, 41, 0.25), 0 4px 6px -2px rgba(217, 4, 41, 0.15);
         }
+        .minimal-input {
+            border: none;
+            border-bottom: 1px solid #D1D5DB;
+            border-radius: 0;
+            padding: 0.75rem 0;
+            background-color: transparent;
+            transition: border-color 0.3s;
+            color: #111827;
+        }
+        .minimal-input:focus {
+            outline: none;
+            border-bottom-color: var(--brand-red);
+            box-shadow: none;
+        }
+        select.minimal-input {
+            padding-right: 2rem;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0 center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            appearance: none;
+        }
+        .button-loading { opacity: 0.7; cursor: not-allowed; }
+        .close-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--brand-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            z-index: 60;
+        }
+        .close-btn:hover {
+            transform: scale(1.1);
+            background-color: #b91c1c;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -63,19 +109,18 @@
                 特別割引 <span class="text-brand-red">お申込</span>
             </h2>
             <p class="mt-4 text-base md:text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed">
-                このページに文字を入力する欄はありません。<br class="hidden sm:inline">
-                申込内容の記入は、<strong class="text-white">Googleフォームを開いたうえで</strong>お願いします。
+                このページのフォームからそのまま申請できます。<strong class="text-white">Googleアカウントは不要</strong>です。
             </p>
         </div>
     </header>
 
     <main class="pb-20 sm:pb-24 px-6">
         <div class="container mx-auto max-w-lg">
-            <div class="lp-card p-8 md:p-10">
+            <div class="lp-card p-8 md:p-10 relative">
                 <div class="mb-8 rounded-lg border-2 border-brand-red bg-red-50 p-5 text-gray-900">
                     <p class="text-center text-sm font-bold text-brand-red tracking-wide mb-2">必須のお手続き（両方）</p>
                     <p class="text-center text-base font-bold text-gray-900 leading-snug">
-                        専用フォームでの申請 <span class="text-gray-400 font-normal mx-1">＋</span> JOYFITアプリからの入会
+                        このページでの申請 <span class="text-gray-400 font-normal mx-1">＋</span> JOYFITアプリからの入会
                     </p>
                     <p class="mt-4 text-sm text-gray-700 leading-relaxed text-center">
                         特典・割引の適用には、<strong class="text-gray-900">上記2点をそろえて完了</strong>していただく必要があります。いずれか一方のみでは適用されません。
@@ -93,56 +138,46 @@
                     </a>
                 </div>
 
-                <div class="mb-8 rounded-lg bg-gray-100 border border-gray-200 p-5 text-center">
-                    <p class="text-sm font-bold text-gray-900 leading-relaxed">
-                        お名前・学年などは<strong class="text-brand-red">このページでは入力できません</strong>。<br>
-                        まず下のボタンから Google フォームを開き、<strong>開いた画面の入力欄</strong>にご記入ください。
-                    </p>
-                    <a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLSe_BFRHR1PKR_SwouRecWlvdH15WxMwNZOQFrt8jqvsVVjQPg/viewform"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="cta-button mt-5 w-full block text-center bg-brand-red text-white font-bold py-4 px-6 rounded-lg hover:bg-brand-red-dark text-base md:text-lg tracking-wide"
-                    >
-                        Googleフォームを開いて入力する
-                    </a>
-                </div>
+                <form id="nodai-rugby-form" class="space-y-8" novalidate>
+                    <input type="hidden" name="campaignType" value="ラグビー割">
 
-                <h3 class="text-xl md:text-2xl font-bold text-gray-900 text-center border-b border-gray-200 pb-4 mb-2">
-                    フォームで聞かれる項目（目安）
-                </h3>
-                <p class="text-sm text-gray-600 text-center mb-6">
-                    以下は事前確認用です。実際の入力欄は上のボタンから開くフォーム内にあります。
-                </p>
-                <ul class="space-y-4 text-gray-700 text-sm md:text-base">
-                    <li class="flex gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center mt-0.5">1</span>
-                        <span><strong class="text-gray-900">お名前</strong>（漢字）<span class="text-brand-red font-bold text-xs ml-1">必須</span></span>
-                    </li>
-                    <li class="flex gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center mt-0.5">2</span>
-                        <span><strong class="text-gray-900">フリガナ</strong>（カタカナ）<span class="text-brand-red font-bold text-xs ml-1">必須</span></span>
-                    </li>
-                    <li class="flex gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center mt-0.5">3</span>
-                        <span><strong class="text-gray-900">現在の学年</strong>（１〜４年生／その他）<span class="text-brand-red font-bold text-xs ml-1">必須</span></span>
-                    </li>
-                    <li class="flex gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center mt-0.5">4</span>
-                        <span><strong class="text-gray-900">卒業予定年月</strong>（日付選択）<span class="text-brand-red font-bold text-xs ml-1">必須</span></span>
-                    </li>
-                </ul>
-                <p class="mt-8 text-xs text-gray-500 leading-relaxed">
-                    割引条件・必要書類・会費の詳細などは、従来どおり店舗または部のご担当者様からのご案内をご確認ください。
-                </p>
-                <a
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSe_BFRHR1PKR_SwouRecWlvdH15WxMwNZOQFrt8jqvsVVjQPg/viewform"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="cta-button mt-6 w-full block text-center bg-gray-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-900 text-sm tracking-wide"
-                >
-                    フォームを開く（同じGoogleフォーム）
-                </a>
+                    <div>
+                        <label for="name" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">お名前（漢字）</label>
+                        <input type="text" id="name" name="お名前" placeholder="例：山田 太郎" required autocomplete="name" class="minimal-input w-full text-lg placeholder-gray-300">
+                    </div>
+
+                    <div>
+                        <label for="furigana" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">フリガナ（カタカナ）</label>
+                        <input type="text" id="furigana" name="フリガナ" placeholder="例：ヤマダ タロウ（カタカナ）" required class="minimal-input w-full text-lg placeholder-gray-300">
+                    </div>
+
+                    <div>
+                        <label for="grade" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">現在の学年</label>
+                        <select id="grade" name="学年" required class="minimal-input w-full text-lg bg-transparent">
+                            <option value="" disabled selected class="text-gray-400">選択してください</option>
+                            <option value="１年生">１年生</option>
+                            <option value="２年生">２年生</option>
+                            <option value="３年生">３年生</option>
+                            <option value="４年生">４年生</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="grad-month" class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">卒業予定年月</label>
+                        <input type="month" id="grad-month" name="卒業予定年月" required class="minimal-input w-full text-lg">
+                    </div>
+
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        割引条件・必要書類・会費の詳細などは、店舗または部のご担当者様からのご案内をご確認ください。
+                    </p>
+
+                    <div class="pt-2">
+                        <button type="submit" class="cta-button w-full bg-brand-red text-white font-bold py-4 px-6 rounded-lg hover:bg-brand-red-dark text-base tracking-wide">
+                            入力内容を送信する
+                        </button>
+                    </div>
+                </form>
             </div>
 
             <p class="text-center mt-10">
@@ -159,5 +194,138 @@
             <p>&copy; JOYFIT24 Kyodo</p>
         </div>
     </footer>
+
+    <div id="completion-modal" class="hidden fixed inset-0 bg-black bg-opacity-90 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="relative bg-white rounded-lg shadow-2xl w-full max-w-lg flex flex-col p-8 overflow-visible">
+            <button type="button" id="modal-close-btn" class="close-btn" aria-label="閉じる">&times;</button>
+            <div class="text-center">
+                <h3 class="text-2xl font-black text-gray-900 mb-2">申請ありがとうございます</h3>
+                <p class="text-sm text-gray-500 font-bold">申請を受け付けました</p>
+                <p class="text-sm text-gray-500 mt-1 mb-6">下記がお控えの代わりになります</p>
+                <div id="receipt-content" class="mb-8 text-left bg-gray-50 p-6 rounded border border-gray-100 space-y-3 text-sm text-gray-600"></div>
+                <div class="bg-red-50 border-2 border-brand-red rounded-lg p-4 text-brand-red shadow-md animate-pulse">
+                    <div class="flex items-center justify-center mb-1">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span class="font-black text-lg">重要</span>
+                    </div>
+                    <p class="font-bold text-sm sm:text-base">この画面をスクリーンショットして<br>必ず保存してください</p>
+                </div>
+                <div class="mt-6">
+                    <a href="https://joyfit.jp/kyodo/app_join/" target="_blank" rel="noopener noreferrer" class="text-xs text-gray-400 hover:text-brand-red underline transition-colors">
+                        まだ入会がお済みでない方はこちら (JOYFIT APP)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('nodai-rugby-form');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const modal = document.getElementById('completion-modal');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            const receiptContent = document.getElementById('receipt-content');
+
+            const gasWebAppUrl = 'https://script.google.com/macros/s/AKfycbzmuAd-yGKOdoD49j3nPi4gjPPaq-0AFXK0faWLsoVLhRK1LLOBvZQBGdanqncljxdw8A/exec';
+
+            function escapeHtml(s) {
+                if (s == null || s === '') return '';
+                return String(s)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                if (!form.checkValidity()) {
+                    showNotification('必須項目を入力してください', 'error');
+                    form.reportValidity();
+                    return;
+                }
+
+                submitButton.disabled = true;
+                submitButton.textContent = '送信中...';
+                submitButton.classList.add('button-loading');
+
+                const formData = new FormData(form);
+                const payload = {};
+                formData.forEach((value, key) => { payload[key] = value; });
+
+                try {
+                    await fetch(gasWebAppUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(payload)
+                    });
+                    showCompletionModal(payload);
+                } catch (error) {
+                    console.error(error);
+                    showNotification('送信失敗。ネットワークを確認してください', 'error');
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = '入力内容を送信する';
+                    submitButton.classList.remove('button-loading');
+                }
+            });
+
+            function showCompletionModal(data) {
+                const t = new Date().toLocaleString('ja-JP');
+                receiptContent.innerHTML = `
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-400 font-medium">申請日時</span>
+                        <span class="font-bold text-gray-800 font-mono">${escapeHtml(t)}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-400 font-medium">キャンペーン</span>
+                        <span class="font-bold text-gray-800">${escapeHtml(data['campaignType'])}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-400 font-medium">お名前</span>
+                        <span class="font-bold text-gray-800">${escapeHtml(data['お名前'])}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-400 font-medium">フリガナ</span>
+                        <span class="font-bold text-gray-800">${escapeHtml(data['フリガナ'])}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-400 font-medium">学年</span>
+                        <span class="font-bold text-gray-800">${escapeHtml(data['学年'])}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-400 font-medium">卒業予定年月</span>
+                        <span class="font-bold text-gray-800">${escapeHtml(data['卒業予定年月'])}</span>
+                    </div>
+                `;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            modalCloseBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+                form.reset();
+            });
+
+            function showNotification(message, type = 'error') {
+                const existing = document.querySelector('.form-notification');
+                if (existing) existing.remove();
+                const notification = document.createElement('div');
+                notification.className = 'form-notification fixed bottom-5 right-5 px-6 py-3 rounded-sm text-white z-[60] transition-opacity duration-300 shadow-xl text-sm font-medium';
+                notification.textContent = message;
+                notification.style.backgroundColor = type === 'success' ? '#10B981' : '#1F2937';
+                if (type === 'error') notification.style.borderLeft = '4px solid #D90429';
+                document.body.appendChild(notification);
+                setTimeout(() => { notification.style.opacity = '1'; }, 10);
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 300);
+                }, 5000);
+            }
+        });
+    </script>
 </body>
 </html>
