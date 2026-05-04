@@ -160,6 +160,60 @@
         }
         .bg-brand-tint { background-color: rgba(166, 54, 70, 0.09); }
         .required-mark::after { content: '*'; color: var(--brand-red); margin-left: 0.25rem; }
+        /* オプション自動契約の注意（店頭掲示イメージ） */
+        .option-precautions {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding: 1.25rem 1rem 1.5rem;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+        }
+        .option-precautions__title {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            margin-bottom: 1.25rem;
+        }
+        .option-precautions__title-line {
+            flex: 1;
+            min-width: 0;
+            height: 1px;
+            background-color: var(--brand-red);
+        }
+        .option-precautions__title-text {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--brand-red);
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+        }
+        .option-precautions__body {
+            font-size: 0.875rem;
+            line-height: 1.75;
+            color: var(--ink);
+            text-align: center;
+        }
+        .option-precautions__body p + p {
+            margin-top: 0.65rem;
+        }
+        .option-mark {
+            background-color: #fef08a;
+            font-weight: 700;
+            padding: 0.08em 0.25em;
+            border-radius: 2px;
+        }
+        .option-precautions__warn {
+            margin-top: 1.25rem;
+            background-color: var(--brand-red);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.8125rem;
+            line-height: 1.5;
+            text-align: center;
+            padding: 0.85rem 0.75rem;
+            border-radius: var(--radius);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -179,15 +233,31 @@
     <main class="pb-20 sm:pb-24 px-6">
         <div class="container mx-auto max-w-lg">
             <div class="lp-card p-8 md:p-10 relative">
-                <div class="joy-inset-notice mb-8 p-5 text-center text-sm text-gray-800 space-y-3 leading-relaxed">
-                    <p class="font-bold text-gray-900">こちら専用ページ申請 ＋ JOYFITアプリから入会</p>
-                    <p>割引適用は上記2点を完了していただく必要があります</p>
+                <div class="joy-inset-notice mb-5 p-5 text-center text-sm text-gray-800 space-y-3 leading-relaxed">
+                    <p class="font-bold text-gray-900 text-base">こちらの申請 ＋ JOYFITアプリ入会</p>
+                    <p class="text-gray-900">割引は上記2点を完了する必要があります<br><span class="text-xs text-gray-700 font-medium">（当月末日までの申請で適用）</span></p>
                     <p class="text-xs sm:text-sm text-gray-800">※キャンペーン内容は随時更新されますので必ず店舗HPをご確認ください。</p>
-                    <p>いずれか一方のみでは適用されません。</p>
-                    <p class="pt-1">
-                        店舗HPは<a href="https://joyfit.jp/kyodo/" target="_blank" rel="noopener noreferrer" class="link-brand">こちら</a>から
-                    </p>
+                    <p class="text-gray-900">いずれか一方のみでは適用されません。</p>
                 </div>
+
+                <div class="option-precautions mb-6" aria-labelledby="option-precautions-heading">
+                    <div class="option-precautions__title">
+                        <span class="option-precautions__title-line" aria-hidden="true"></span>
+                        <span id="option-precautions-heading" class="option-precautions__title-text">注意事項</span>
+                        <span class="option-precautions__title-line" aria-hidden="true"></span>
+                    </div>
+                    <div class="option-precautions__body">
+                        <p>オプションは入会時に<span class="option-mark">自動契約</span>となります</p>
+                        <p>不要な場合<span class="option-mark">当月末日</span>に解約をお願いいたします</p>
+                        <p>入会後［<span class="font-bold">JOYFIT APP</span>］から解約が可能です</p>
+                        <p>解約後も月末迄サービスをご利用頂けます</p>
+                    </div>
+                    <p class="option-precautions__warn">※解約忘れによる返金は出来ません</p>
+                </div>
+
+                <p class="text-center text-sm text-gray-800 mb-8">
+                    店舗HPは<a href="https://joyfit.jp/kyodo/" target="_blank" rel="noopener noreferrer" class="link-brand">こちら</a>から
+                </p>
 
                 <form id="nodai-rugby-form" class="space-y-8" novalidate>
                     <input type="hidden" name="campaignType" value="ラグビー割">
