@@ -1,178 +1,369 @@
-/**
- * GAS 本番へコピーする用のソース（この1ファイルを正とする）
- * スプレッドシート ID: 1w7ExndmZn7t2_z55CvxRDMZy4QAcuEyNhIuj-6sUy3E
- * HTML: transfer_form / referral_form / continuation_form / nodai-rugby/index の gasWebAppUrl と対になる Web アプリにデプロイ
- * 農大LP: campaignType「ラグビー割」→ シート「ラグビー割」
- * デプロイ: Webアプリ / 自分で実行 / アクセスは全員
- */
-
-// ▼▼▼【設定項目】▼▼▼ 画像を保存するフォルダの名前
-const UPLOAD_FOLDER_NAME = 'JOYFIT乗り換え割_アップロード画像';
-
-/**
- * WebアプリからのPOSTリクエストを処理するメイン関数
- */
-function doPost(e) {
-  try {
-    // データが空の場合のハンドリング
-    if (!e || !e.postData || !e.postData.contents) {
-        throw new Error('ポストデータが見つかりません。');
-    }
-
-    const data = JSON.parse(e.postData.contents);
-    const campaignType = data.campaignType;
-    
-    if (!campaignType) {
-      throw new Error('campaignTypeが指定されていません。');
-    }
-
-    // ★★★★★★ ここでスプレッドシートIDを直接指定します ★★★★★★
-    // 共有いただいたスプレッドシートのID
-    const SPREADSHEET_ID = '1w7ExndmZn7t2_z55CvxRDMZy4QAcuEyNhIuj-6sUy3E';
-    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
-    // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-
-    const timestamp = new Date();
-    let sheet;
-
-    // キャンペーン種別に応じて処理を分岐
-    // HTML側の value 値と一致させる必要があります
-    switch (campaignType) {
-      case '紹介・ペア入会':
-      case 'お友達紹介キャンペーン': // 名称変更に対応
-        sheet = ss.getSheetByName('紹介・ペア入会');
-        if (!sheet) throw new Error('シート「紹介・ペア入会」が見つかりません。');
-        // ヘッダー行がない場合は作成
-        if (sheet.getLastRow() === 0) {
-          sheet.appendRow(["申請日時", "キャンペーン種別", "紹介者_名前", "紹介者_電話番号", "被紹介者_名前", "被紹介者_電話番号", "入会予定店舗"]);
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>JOYFIT24経堂 | 東京農業大学ラグビー部様 特別割引</title>
+    <meta name="description" content="JOYFIT24経堂｜東京農業大学ラグビー部様 特別割引お申込">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --logo-wine-bg: #A63646;
+            --brand-red: #A63646;
+            --brand-red-dark: #852c38;
+            --brand-burgundy: #8E3545;
+            --brand-red-soft: rgba(166, 54, 70, 0.18);
+            --ink: #111827;
+            --muted: #6B7280;
+            --line: #E5E7EB;
+            --surface: #FFFFFF;
+            --radius: 0.75rem;
         }
-        sheet.appendRow([
-          timestamp, campaignType,
-          data['ご紹介者様のお名前'], data['ご紹介者様のお電話番号'],
-          data['ご友人のお名前'], data['ご友人のお電話番号'],
-          data['入会予定店舗']
-        ]);
-        break;
-
-      case '6ヶ月継続':
-      case '6ヶ月継続(2026年8月迄)': // ★HTMLのvalueに合わせて追加しました
-        sheet = ss.getSheetByName('6ヶ月継続');
-        if (!sheet) throw new Error('シート「6ヶ月継続」が見つかりません。');
-        if (sheet.getLastRow() === 0) {
-          sheet.appendRow(["申請日時", "キャンペーン種別", "名前", "在籍条件同意"]);
+        body {
+            font-family: 'Noto Sans JP', system-ui, sans-serif;
+            color: #F3F4F6;
+            background-color: var(--logo-wine-bg);
+            min-height: 100vh;
         }
-        sheet.appendRow([
-          timestamp, campaignType,
-          data['お名前'], data['在籍条件同意']
-        ]);
-        break;
-
-      case '乗り換え':
-        sheet = ss.getSheetByName('乗り換え');
-        if (!sheet) throw new Error('シート「乗り換え」が見つかりません。');
-        if (sheet.getLastRow() === 0) {
-          sheet.appendRow(["申請日時", "キャンペーン種別", "名前", "移籍元クラブ", "移籍元地名", "画像リンク"]);
+        .text-brand-red { color: var(--brand-red); }
+        .bg-brand-red { background-color: var(--brand-red); }
+        .hover\:bg-brand-red-dark:hover { background-color: var(--brand-red-dark); }
+        .border-brand-red { border-color: var(--brand-red); }
+        .lp-card {
+            background: var(--surface);
+            color: var(--ink);
+            border: 1px solid var(--line);
+            border-radius: 1.25rem;
+            border-top: 3px solid var(--brand-red);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
         }
-        // 画像保存処理呼び出し
-        const imageUrls = saveImagesToDrive(data);
-        sheet.appendRow([
-          timestamp, campaignType,
-          data['お名前'], data['移籍元クラブ'],
-          data['移籍元クラブの地名'], imageUrls.join('\n')
-        ]);
-        break;
-
-      case 'ラグビー割':
-        sheet = ss.getSheetByName('ラグビー割');
-        if (!sheet) throw new Error('シート「ラグビー割」が見つかりません。');
-        if (sheet.getLastRow() === 0) {
-          sheet.appendRow(['申請日時', 'キャンペーン種別', 'お名前', 'フリガナ', '学年', '卒業予定年月']);
+        .joy-field-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
         }
-        sheet.appendRow([
-          timestamp,
-          campaignType,
-          data['お名前'],
-          data['フリガナ'],
-          data['学年'],
-          data['卒業予定年月']
-        ]);
-        break;
+        .joy-input,
+        select.joy-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--ink);
+            background-color: #FAFBFC;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        .joy-input::placeholder { color: #6B7280; }
+        .joy-input:hover:not(:focus):not(:disabled),
+        select.joy-input:hover:not(:focus):not(:disabled) {
+            border-color: #D1D5DB;
+        }
+        .joy-input:focus,
+        select.joy-input:focus {
+            outline: none;
+            border-color: var(--brand-red);
+            background-color: var(--surface);
+            box-shadow: 0 0 0 3px var(--brand-red-soft);
+        }
+        select.joy-input {
+            padding-right: 2.5rem;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.75rem center;
+            background-repeat: no-repeat;
+            background-size: 1.25em 1.25em;
+        }
+        .joy-submit {
+            width: 100%;
+            background-color: var(--brand-red);
+            color: #fff;
+            font-weight: 700;
+            padding: 0.875rem 1rem;
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 14px rgba(166, 54, 70, 0.3);
+        }
+        .joy-submit:hover:not(:disabled) {
+            background-color: var(--brand-red-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(166, 54, 70, 0.38);
+        }
+        .joy-submit:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--brand-red-soft), 0 4px 14px rgba(166, 54, 70, 0.3);
+        }
+        .joy-inset-notice {
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background: #FAFBFC;
+            border-top: 3px solid var(--brand-red);
+        }
+        .button-loading { opacity: 0.7; cursor: not-allowed; }
+        .close-btn {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--brand-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            z-index: 60;
+        }
+        .close-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--brand-red-dark);
+        }
+        .site-footer-bar {
+            background-color: var(--brand-red);
+            padding: 1.25rem 1rem;
+        }
+        .site-footer-bar .footer-logo-img {
+            height: 2rem;
+            width: auto;
+            max-width: min(100%, 220px);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .link-brand {
+            color: var(--brand-red);
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-color: var(--brand-red);
+            text-underline-offset: 0.25em;
+            text-decoration-thickness: 2px;
+        }
+        .link-brand:hover {
+            opacity: 0.88;
+        }
+        .bg-brand-tint { background-color: rgba(166, 54, 70, 0.09); }
+    </style>
+</head>
+<body class="antialiased">
 
-      default:
-        // 一致しない場合はエラーログを残しつつ、エラーを返す
-        throw new Error('不明なキャンペーン種別です: ' + campaignType);
-    }
+    <header class="w-full">
+        <div class="container mx-auto px-6 pt-12 pb-6 md:pt-16 text-center max-w-3xl">
+            <p class="text-sm md:text-base font-bold text-gray-300 tracking-widest mb-3">東京農業大学 ラグビー部 部員様限定</p>
+            <h1 class="text-3xl md:text-5xl font-bold text-white leading-tight drop-shadow-lg">
+                JOYFIT24 <span class="text-brand-red">経堂</span>
+            </h1>
+            <h2 class="mt-6 text-2xl md:text-4xl font-bold text-white drop-shadow-lg">
+                特別割引 <span class="text-brand-red">お申込</span>
+            </h2>
+        </div>
+    </header>
 
-    // ContentService には withHeaders が無いため setMimeType まで（HTML は no-cors POST で問題になりにくい）
-    return ContentService
-      .createTextOutput(JSON.stringify({ status: 'success', message: 'データを受信しました。' }))
-      .setMimeType(ContentService.MimeType.JSON);
+    <main class="pb-20 sm:pb-24 px-6">
+        <div class="container mx-auto max-w-lg">
+            <div class="lp-card p-8 md:p-10 relative">
+                <div class="joy-inset-notice mb-8 p-5 text-center text-sm text-gray-800 space-y-3 leading-relaxed">
+                    <p class="font-bold text-gray-900">こちら専用ページ申請 ＋ JOYFITアプリから入会</p>
+                    <p>割引適用は上記2点を完了していただく必要があります</p>
+                    <p class="text-xs sm:text-sm text-gray-800">※キャンペーン内容は随時更新されますので必ず店舗HPをご確認ください。</p>
+                    <p>いずれか一方のみでは適用されません。</p>
+                    <p class="pt-1">
+                        店舗HPは<a href="https://joyfit.jp/kyodo/" target="_blank" rel="noopener noreferrer" class="link-brand">こちら</a>から
+                    </p>
+                </div>
 
-  } catch (error) {
-    Logger.log(`[エラー発生] ${error.toString()} | [受信データ] ${e ? e.postData.contents : 'なし'}`);
-    
-    return ContentService
-      .createTextOutput(JSON.stringify({ status: 'error', message: `サーバー側でエラーが発生しました: ${error.message}` }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}
+                <form id="nodai-rugby-form" class="space-y-8" novalidate>
+                    <input type="hidden" name="campaignType" value="ラグビー割">
 
-// OPTIONS（必要なら空応答。カスタムヘッダは ContentService では付与不可）
-function doOptions(e) {
-  return ContentService.createTextOutput('');
-}
+                    <div>
+                        <label for="name" class="joy-field-label">お名前（漢字）</label>
+                        <input type="text" id="name" name="お名前" placeholder="例：山田 太郎" required autocomplete="name" class="joy-input">
+                    </div>
 
-/**
- * フォルダを取得または作成するヘルパー関数
- */
-function getOrCreateFolder(folderName) {
-  const folders = DriveApp.getFoldersByName(folderName);
-  if (folders.hasNext()) {
-    return folders.next();
-  } else {
-    return DriveApp.createFolder(folderName);
-  }
-}
+                    <div>
+                        <label for="furigana" class="joy-field-label">フリガナ（カタカナ）</label>
+                        <input type="text" id="furigana" name="フリガナ" placeholder="例：ヤマダ タロウ" required class="joy-input">
+                    </div>
 
-/**
- * 送信されたBase64画像をデコードしてGoogleドライブに保存する関数
- */
-function saveImagesToDrive(data) {
-  const folder = getOrCreateFolder(UPLOAD_FOLDER_NAME);
-  const imageUrls = [];
-  const applicantName = data['お名前'] || '不明な申請者';
-  
-  for (let i = 1; i <= 5; i++) {
-    const base64Data = data[`imageBase64_${i}`];
-    const fileName = data[`imageFileName_${i}`];
-    const mimeType = data[`imageMimeType_${i}`] || 'application/octet-stream';
-    
-    if (base64Data && fileName) {
-      try {
-        const decoded = Utilities.base64Decode(base64Data, Utilities.Charset.UTF_8);
-        const blob = Utilities.newBlob(decoded, mimeType, fileName);
-        const dateStr = Utilities.formatDate(new Date(), "JST", "yyyyMMdd_HHmmss");
-        // ファイル名重複防止のためタイムスタンプを付与
-        const uniqueFileName = `${dateStr}_${applicantName}_${fileName}`;
-        const file = folder.createFile(blob).setName(uniqueFileName);
-        
-        // 保存したファイルのURLをリストに追加
-        imageUrls.push(file.getUrl());
-      } catch (e) {
-        Logger.log(`[ファイル保存失敗] 申請者: ${applicantName}, ファイル名: ${fileName} | エラー: ${e.toString()}`);
-      }
-    }
-  }
-  return imageUrls;
-}
+                    <div>
+                        <label for="grade" class="joy-field-label">現在の学年</label>
+                        <select id="grade" name="学年" required class="joy-input">
+                            <option value="" disabled selected class="text-gray-400">選択してください</option>
+                            <option value="１年生">１年生</option>
+                            <option value="２年生">２年生</option>
+                            <option value="３年生">３年生</option>
+                            <option value="４年生">４年生</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
 
-/**
- * 権限確認用のダミー関数（初回承認用）
- */
-function checkPermissions() {
-  try {
-    SpreadsheetApp.getActiveSpreadsheet();
-    DriveApp.getRootFolder();
-    Logger.log('承認プロセスを開始します。');
-  } catch (e) {}
-}
+                    <div>
+                        <label for="grad-month" class="joy-field-label">卒業予定年月</label>
+                        <input type="month" id="grad-month" name="卒業予定年月" required class="joy-input">
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" class="joy-submit py-4 text-base">
+                            入力内容を送信する
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer-bar border-t border-black/15">
+        <div class="container mx-auto text-center">
+            <img src="joyfit_logo.png" alt="JOYFIT24" class="footer-logo-img">
+        </div>
+    </footer>
+
+    <div id="completion-modal" class="hidden fixed inset-0 bg-black bg-opacity-90 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="relative bg-white rounded-lg shadow-2xl w-full max-w-lg flex flex-col p-8 overflow-visible">
+            <button type="button" id="modal-close-btn" class="close-btn" aria-label="閉じる">&times;</button>
+            <div class="text-center">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">申請ありがとうございます</h3>
+                <p class="text-sm text-gray-700 font-bold mb-6">申請を受け付けました</p>
+                <div id="receipt-content" class="mb-8 text-left bg-gray-50 p-6 rounded border border-gray-100 space-y-3 text-sm text-gray-900"></div>
+                <div class="bg-brand-tint border-2 border-brand-red rounded-lg p-4 text-brand-red shadow-md animate-pulse">
+                    <div class="flex items-center justify-center mb-1">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span class="font-bold text-lg">重要</span>
+                    </div>
+                    <p class="font-bold text-sm sm:text-base">この画面をスクリーンショットして<br>必ず保存してください</p>
+                </div>
+                <div class="mt-6">
+                    <a href="https://joyfit.jp/kyodo/app_join/" target="_blank" rel="noopener noreferrer" class="link-brand text-xs">
+                        JOYFITアプリで入会手続きへ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('nodai-rugby-form');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const modal = document.getElementById('completion-modal');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
+            const receiptContent = document.getElementById('receipt-content');
+
+            const gasWebAppUrl = 'https://script.google.com/macros/s/AKfycbzmuAd-yGKOdoD49j3nPi4gjPPaq-0AFXK0faWLsoVLhRK1LLOBvZQBGdanqncljxdw8A/exec';
+
+            function escapeHtml(s) {
+                if (s == null || s === '') return '';
+                return String(s)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                if (!form.checkValidity()) {
+                    showNotification('必須項目を入力してください', 'error');
+                    form.reportValidity();
+                    return;
+                }
+
+                submitButton.disabled = true;
+                submitButton.textContent = '送信中...';
+                submitButton.classList.add('button-loading');
+
+                const formData = new FormData(form);
+                const payload = {};
+                formData.forEach((value, key) => { payload[key] = value; });
+
+                try {
+                    await fetch(gasWebAppUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(payload)
+                    });
+                    showCompletionModal(payload);
+                } catch (error) {
+                    console.error(error);
+                    showNotification('送信失敗。ネットワークを確認してください', 'error');
+                } finally {
+                    submitButton.disabled = false;
+                    submitButton.textContent = '入力内容を送信する';
+                    submitButton.classList.remove('button-loading');
+                }
+            });
+
+            function showCompletionModal(data) {
+                const t = new Date().toLocaleString('ja-JP');
+                receiptContent.innerHTML = `
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-600 font-medium">申請日時</span>
+                        <span class="font-bold text-gray-900 font-mono">${escapeHtml(t)}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-600 font-medium">キャンペーン</span>
+                        <span class="font-bold text-gray-900">${escapeHtml(data['campaignType'])}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-600 font-medium">お名前</span>
+                        <span class="font-bold text-gray-900">${escapeHtml(data['お名前'])}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-600 font-medium">フリガナ</span>
+                        <span class="font-bold text-gray-900">${escapeHtml(data['フリガナ'])}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-600 font-medium">学年</span>
+                        <span class="font-bold text-gray-900">${escapeHtml(data['学年'])}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-600 font-medium">卒業予定年月</span>
+                        <span class="font-bold text-gray-900">${escapeHtml(data['卒業予定年月'])}</span>
+                    </div>
+                `;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            modalCloseBtn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+                form.reset();
+            });
+
+            function showNotification(message, type = 'error') {
+                const existing = document.querySelector('.form-notification');
+                if (existing) existing.remove();
+                const notification = document.createElement('div');
+                notification.className = 'form-notification fixed bottom-5 right-5 px-6 py-3 rounded-sm text-white z-[60] transition-opacity duration-300 shadow-xl text-sm font-medium';
+                notification.textContent = message;
+                notification.style.backgroundColor = type === 'success' ? '#10B981' : '#1F2937';
+                if (type === 'error') notification.style.borderLeft = '4px solid var(--brand-red)';
+                document.body.appendChild(notification);
+                setTimeout(() => { notification.style.opacity = '1'; }, 10);
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 300);
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
