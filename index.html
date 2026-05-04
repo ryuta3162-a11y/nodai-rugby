@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>JOYFIT24経堂 | 東京農業大学ラグビー部様 特別割引</title>
-    <meta name="description" content="JOYFIT24経堂｜東京農業大学ラグビー部様 特別割引お申込">
+    <title>JOYFIT24経堂 | 東京農業大学ラグビー部 特別割引申請ページ</title>
+    <meta name="description" content="JOYFIT24経堂｜東京農業大学ラグビー部員様向け 特別割引申請ページ">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -159,18 +159,19 @@
             opacity: 0.88;
         }
         .bg-brand-tint { background-color: rgba(166, 54, 70, 0.09); }
+        .required-mark::after { content: '*'; color: var(--brand-red); margin-left: 0.25rem; }
     </style>
 </head>
 <body class="antialiased">
 
     <header class="w-full">
         <div class="container mx-auto px-6 pt-12 pb-6 md:pt-16 text-center max-w-3xl">
-            <p class="text-sm md:text-base font-bold text-gray-300 tracking-widest mb-3">東京農業大学 ラグビー部 部員様限定</p>
+            <p class="text-sm md:text-base font-bold text-white tracking-widest mb-4 drop-shadow-md">東京農業大学 ラグビー部 部員様限定</p>
             <h1 class="text-3xl md:text-5xl font-bold text-white leading-tight drop-shadow-lg">
-                JOYFIT24 <span class="text-brand-red">経堂</span>
+                JOYFIT24 経堂
             </h1>
-            <h2 class="mt-6 text-2xl md:text-4xl font-bold text-white drop-shadow-lg">
-                特別割引 <span class="text-brand-red">お申込</span>
+            <h2 class="mt-5 text-2xl md:text-4xl font-bold text-white drop-shadow-lg">
+                特別割引申請ページ
             </h2>
         </div>
     </header>
@@ -199,6 +200,16 @@
                     <div>
                         <label for="furigana" class="joy-field-label">フリガナ（カタカナ）</label>
                         <input type="text" id="furigana" name="フリガナ" placeholder="例：ヤマダ タロウ" required class="joy-input">
+                    </div>
+
+                    <div>
+                        <label for="phone" class="joy-field-label required-mark">お電話番号（本人）</label>
+                        <input type="tel" id="phone" name="お電話番号" placeholder="09012345678" required class="joy-input" autocomplete="tel" pattern="[0-9]{10,11}" title="ハイフン不要・半角数字で入力してください。">
+                    </div>
+
+                    <div>
+                        <label for="email" class="joy-field-label required-mark">メールアドレス（本人）</label>
+                        <input type="email" id="email" name="メールアドレス" placeholder="例：taro@example.com" required class="joy-input" autocomplete="email" inputmode="email">
                     </div>
 
                     <div>
@@ -328,6 +339,14 @@
                     <div class="flex justify-between border-b border-gray-200 pb-2">
                         <span class="text-gray-600 font-medium">フリガナ</span>
                         <span class="font-bold text-gray-900">${escapeHtml(data['フリガナ'])}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-600 font-medium">お電話番号</span>
+                        <span class="font-bold text-gray-900">${escapeHtml(data['お電話番号'])}</span>
+                    </div>
+                    <div class="flex justify-between border-b border-gray-200 pb-2">
+                        <span class="text-gray-600 font-medium">メールアドレス</span>
+                        <span class="font-bold text-gray-900 break-all">${escapeHtml(data['メールアドレス'])}</span>
                     </div>
                     <div class="flex justify-between border-b border-gray-200 pb-2">
                         <span class="text-gray-600 font-medium">学年</span>
